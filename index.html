@@ -42,19 +42,20 @@
       </div>
 
       <div class="row location-dt">
-        <h1 id="city">Seattle</h1>
+        <h1 class="city" id="city"></h1>
         <div class="date-time" id="date">Thursday 16th March, 2023</div>
         <div class="date-time" id="time">12:59</div>
       </div>
 
-      <div class="row current">
+      <div class="row current-information">
         <div class="col my-auto current-contents-left">
-          <strong>19°</strong>/ 1°
+          <strong id="current-high-temp"></strong>/
+          <span class="low-temp" id="current-low-temp"></span>
           <div id="icon"></div>
         </div>
 
         <div class="col my-auto current-contents-center">
-          17
+          <span id="current-temperature">17</span>
           <span class="units">
             <a id="celsius-link" href="#">°C</a>
             |<a id="fahrenheit-link" href="#">°F</a>
@@ -62,16 +63,21 @@
         </div>
 
         <div class="col my-auto current-contents-right">
-          <div class="description" id="description">Clear</div>
+          <div class="description" id="description"></div>
           <ul class="weather-details">
+            <li>Feels like: <span id="feels-like"></span></li>
             <li>Humidity: <span id="humidity"></span></li>
-            <li>Pressure: <span id="pressure"></span></li>
             <li>Wind: <span id="wind"></span></li>
           </ul>
         </div>
       </div>
     </div>
-
+    <div class="footer">
+      <a href="https://github.com/a-blaine/shecodes-weather-app" target="_blank"
+        >Open source code</a
+      >
+      by Ashley Blaine
+    </div>
     <script src="src/app.js"></script>
   </body>
 </html>
