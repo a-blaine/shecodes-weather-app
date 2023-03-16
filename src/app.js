@@ -34,12 +34,12 @@ function formatDate(timestamp) {
 function formatTime(timestamp) {
   let time = new Date(timestamp);
   let hours = time.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
   let minutes = time.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`;
-  }
-  if (hours < 10) {
-    hours = `0${hours}`;
   }
   return `${hours}:${minutes}`;
 }
