@@ -103,3 +103,7 @@ ul {
 .active {
   color: #25161b;
 }
+
+.inactive {
+  color: #ffffff;
+}
