@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600&display=swap");
+
+body {
+  color: #25161b;
+  font-family: Noto Sans;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  border: 1px solid rgba(32, 22, 27, 0.25);
+  border-radius: 10px;
+  display: block;
+  margin: 30px auto;
+  max-width: 800px;
+  min-width: 200px;
+}
+
+.city,
+.date-time,
+.units,
+.description {
+  font-size: 20px;
+}
+
+.weather-details {
+  font-size: 13px;
+  line-height: 1.3;
+  opacity: 90%;
+}
+
+.location-dt {
+  margin: 40px auto 30px auto;
+}
+
+.current {
+  margin: 30px auto 10px auto;
+  text-align: center;
+}
+
+.current-contents-center {
+  font-size: 100px;
+  font-weight: bold;
+}
