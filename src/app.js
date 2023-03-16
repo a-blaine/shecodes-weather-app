@@ -31,8 +31,8 @@ function formatDate(timestamp) {
   return `${day} ${date} ${month}, ${year}`;
 }
 
-function formatTime(timestamp) {
-  let time = new Date(timestamp);
+function formatTime() {
+  let time = new Date();
   let hours = time.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
@@ -85,12 +85,6 @@ function showTemperature(response) {
   degreesF.classList.add("inactive");
 }
 
-let city = "Seattle";
-let apiKey = "7ae5e58d29dbe83f5367ad389e4a99a2";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
-axios.get(apiUrl).then(showTemperature);
-
 function fetchLocation(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
@@ -98,10 +92,28 @@ function fetchLocation(position) {
   let currentApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${currentApiKey}&units=metric`;
   axios.get(currentApiUrl).then(showTemperature);
 }
-
 function buttonLocation() {
   navigator.geolocation.getCurrentPosition(fetchLocation);
 }
-
 let button = document.querySelector("button");
 button.addEventListener("click", buttonLocation);
+
+//
+
+//
+
+//
+function newCity(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#search-bar");
+  let h1 = document.querySelector("#city");
+  h1.innerHTML = searchInput.value;
+}
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", newCity);
+
+let city = "Seattle";
+let apiKey = "7ae5e58d29dbe83f5367ad389e4a99a2";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+axios.get(apiUrl).then(showTemperature);
