@@ -32,7 +32,6 @@ ul {
   color: #25161b;
 }
 
-.city,
 .date-time,
 .units,
 .description {
@@ -57,12 +56,18 @@ ul {
   font-size: 20px;
 }
 
+.current-contents-left img {
+  display: block;
+  margin: 0 auto;
+  transform: scale(1.5);
+}
+
 .low-temp {
   opacity: 90%;
 }
 
 .current-contents-center {
-  font-size: 110px;
+  font-size: 120px;
   font-weight: bold;
   text-align: right;
 }

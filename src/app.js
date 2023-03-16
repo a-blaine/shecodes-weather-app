@@ -45,41 +45,26 @@ function formatTime(timestamp) {
 }
 
 function showTemperature(response) {
-  let newTemperature = Math.round(response.data.main.temp);
-  let center = document.querySelector("#current-temperature");
-  center.innerHTML = `${newTemperature}`;
+  let centerTemp = document.querySelector("#current-temperature");
+  centerTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
 
-  let currentHighTemp = Math.round(response.data.main.temp_max);
   let leftTemp = document.querySelector("#current-high-temp");
-  leftTemp.innerHTML = `${currentHighTemp}°`;
+  leftTemp.innerHTML = `${Math.round(response.data.main.temp_max)}°`;
 
-  let currentLowTemp = Math.round(response.data.main.temp_min);
   let rightTemp = document.querySelector("#current-low-temp");
-  rightTemp.innerHTML = `${currentLowTemp}°`;
+  rightTemp.innerHTML = `${Math.round(response.data.main.temp_min)}°`;
 
-  //
-  //
-  let icon = response.data.weather[0].icon;
-  let displayIcon = document.querySelector("#icon");
-  displayIcon.innerHTML = `${icon}`;
-  //
-  //
-
-  let description = response.data.weather[0].main;
   let displayDescription = document.querySelector("#description");
-  displayDescription.innerHTML = `${description}`;
+  displayDescription.innerHTML = `${response.data.weather[0].main}`;
 
-  let feelsLike = Math.round(response.data.main.feels_like);
   let displayFeel = document.querySelector("#feels-like");
-  displayFeel.innerHTML = `${feelsLike}°`;
+  displayFeel.innerHTML = `${Math.round(response.data.main.feels_like)}°`;
 
-  let humidity = response.data.main.humidity;
   let displayHumidity = document.querySelector("#humidity");
-  displayHumidity.innerHTML = ` ${humidity}%`;
+  displayHumidity.innerHTML = ` ${response.data.main.humidity}%`;
 
-  let windSpeed = Math.round(response.data.wind.speed);
   let displayWind = document.querySelector("#wind");
-  displayWind.innerHTML = ` ${windSpeed}km/h`;
+  displayWind.innerHTML = ` ${Math.round(response.data.wind.speed)}km/h`;
 
   let displayDate = document.querySelector("#date");
   displayDate.innerHTML = formatDate(response.data.dt * 1000);
@@ -87,10 +72,16 @@ function showTemperature(response) {
   let displayTime = document.querySelector("#time");
   displayTime.innerHTML = formatTime(response.data.dt * 1000);
 
-  let degreesC = document.querySelector("#celsius-link");
-  degreesC.classList.add("active");
+  let displayIcon = document.querySelector("#icon");
+  displayIcon.setAttribute("alt", response.data.weather[0].description);
+  displayIcon.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 
+  let degreesC = document.querySelector("#celsius-link");
   let degreesF = document.querySelector("#fahrenheit-link");
+  degreesC.classList.add("active");
   degreesF.classList.add("inactive");
 }
 
@@ -99,3 +90,18 @@ let apiKey = "7ae5e58d29dbe83f5367ad389e4a99a2";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
 axios.get(apiUrl).then(showTemperature);
+
+function fetchLocation(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let currentApiKey = "7ae5e58d29dbe83f5367ad389e4a99a2";
+  let currentApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${currentApiKey}&units=metric`;
+  axios.get(currentApiUrl).then(showTemperature);
+}
+
+function buttonLocation() {
+  navigator.geolocation.getCurrentPosition(fetchLocation);
+}
+
+let button = document.querySelector("button");
+button.addEventListener("click", buttonLocation);
