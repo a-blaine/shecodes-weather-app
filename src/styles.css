@@ -72,6 +72,7 @@ ul {
 
 .current-contents-center {
   font-size: 120px;
+  padding: 0;
   font-weight: bold;
   text-align: right;
 }
