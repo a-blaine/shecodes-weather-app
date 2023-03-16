@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600&display=swap");
 
 body {
+  background: #f0fbff;
   color: #25161b;
   font-family: Noto Sans;
 }
@@ -21,6 +22,7 @@ ul {
 }
 
 .container {
+  background: #bccad6;
   border: 1px solid rgba(32, 22, 27, 0.25);
   border-radius: 10px;
   display: block;
