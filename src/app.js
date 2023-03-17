@@ -43,26 +43,38 @@ function formatTime() {
   return `${hours}:${minutes}`;
 }
 
+function formatForecastDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
 function formatForecast(response) {
-  console.log(response.data.daily);
+  let weatherForecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-        <div class="forecast-day">${day}</div>
+  weatherForecast.forEach(function (forecastDay, index) {
+    if (index > 0 && index < 7) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+        <div class="forecast-day">${formatForecastDay(forecastDay.dt)}</div>
           <img
-            src="https://openweathermap.org/img/wn/10d@2x.png"
+            src="https://openweathermap.org/img/wn/${
+              forecastDay.weather[0].icon
+            }@2x.png"
             alt=""
             width="42"
           />
         <div class="forecast-temperature">
-            <span class="forecast-temperature-max">22°</span>/
-            <span class="low-temp">12°</span>
+            <span class="forecast-temperature-max">${Math.round(
+              forecastDay.temp.max
+            )}°</span>/
+            <span class="low-temp">${Math.round(forecastDay.temp.min)}°</span>
         </div>
       </div>`;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
@@ -95,7 +107,7 @@ function showTemperature(response) {
   leftTemp.innerHTML = `${Math.round(currentHighTemperatureC)}°`;
   rightTemp.innerHTML = `${Math.round(currentLowTemperatureC)}°`;
   displayDescription.innerHTML = `${response.data.weather[0].main}`;
-  displayFeel.innerHTML = `${Math.round(feelsLikeTemperatureC)}°`;
+  displayFeel.innerHTML = ` ${Math.round(feelsLikeTemperatureC)}°`;
   displayHumidity.innerHTML = ` ${response.data.main.humidity}%`;
   displayWind.innerHTML = ` ${Math.round(response.data.wind.speed)}km/h`;
   displayDate.innerHTML = formatDate(response.data.dt * 1000);
