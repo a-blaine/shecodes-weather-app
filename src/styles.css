@@ -111,18 +111,10 @@ ul {
   font-weight: bold;
 }
 
-.units-celsius {
+.current-contents-center .active {
   color: #25161b;
 }
 
-.units-fahrenheit {
-  color: #ffffff;
-}
-
-.active {
-  color: #25161b;
-}
-
-.inactive {
+.current-contents-center .inactive {
   color: #ffffff;
 }
