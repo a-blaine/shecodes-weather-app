@@ -43,10 +43,11 @@ function formatTime() {
   return `${hours}:${minutes}`;
 }
 
-function formatForecast() {
+function formatForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  let days = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thurs"];
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri"];
   days.forEach(function (day) {
     forecastHTML =
       forecastHTML +
@@ -67,6 +68,12 @@ function formatForecast() {
   forecastElement.innerHTML = forecastHTML;
 }
 
+function fetchForecast(coordinates) {
+  let apiKey = "ca0db41e2e878c74a1dfc7ffece370d4";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(formatForecast);
+}
+
 function showTemperature(response) {
   let h1 = document.querySelector("#city");
   let centerTemp = document.querySelector("#current-temperature");
@@ -79,7 +86,6 @@ function showTemperature(response) {
   let displayDate = document.querySelector("#date");
   let displayTime = document.querySelector("#time");
   let displayIcon = document.querySelector("#icon");
-  formatForecast();
   celsiusTemperature = response.data.main.temp;
   currentHighTemperatureC = response.data.main.temp_max;
   currentLowTemperatureC = response.data.main.temp_min;
@@ -99,13 +105,13 @@ function showTemperature(response) {
     "src",
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+
+  fetchForecast(response.data.coord);
 }
 
 function fetchLocation(position) {
-  let lat = position.coords.latitude;
-  let lon = position.coords.longitude;
   let currentApiKey = "7ae5e58d29dbe83f5367ad389e4a99a2";
-  let currentApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${currentApiKey}&units=metric`;
+  let currentApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${currentApiKey}&units=metric`;
   axios.get(currentApiUrl).then(showTemperature);
 }
 
