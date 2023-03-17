@@ -61,14 +61,14 @@ function showTemperature(response) {
   celsiusTemperature = response.data.main.temp;
   currentHighTemperatureC = response.data.main.temp_max;
   currentLowTemperatureC = response.data.main.temp_min;
-  feelsLikeTemperature = response.data.main.feels_like;
+  feelsLikeTemperatureC = response.data.main.feels_like;
 
   h1.innerHTML = response.data.name;
   centerTemp.innerHTML = `${Math.round(celsiusTemperature)}`;
   leftTemp.innerHTML = `${Math.round(currentHighTemperatureC)}°`;
   rightTemp.innerHTML = `${Math.round(currentLowTemperatureC)}°`;
   displayDescription.innerHTML = `${response.data.weather[0].main}`;
-  displayFeel.innerHTML = `${Math.round(feelsLikeTemperature)}°`;
+  displayFeel.innerHTML = `${Math.round(feelsLikeTemperatureC)}°`;
   displayHumidity.innerHTML = ` ${response.data.main.humidity}%`;
   displayWind.innerHTML = ` ${Math.round(response.data.wind.speed)}km/h`;
   displayDate.innerHTML = formatDate(response.data.dt * 1000);
@@ -120,14 +120,14 @@ function showFahrenheitTemperature(event) {
     (currentLowTemperatureC * 9) / 5 + 32
   )}°`;
   feelsLikeElement.innerHTML = `${Math.round(
-    (feelsLikeTemperature * 9) / 5 + 32
+    (feelsLikeTemperatureC * 9) / 5 + 32
   )}°`;
 }
 
 let celsiusTemperature = null;
 let currentHighTemperatureC = null;
 let currentLowTemperatureC = null;
-let feelsLikeTemperature = null;
+let feelsLikeTemperatureC = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
