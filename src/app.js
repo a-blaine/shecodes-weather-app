@@ -45,21 +45,26 @@ function formatTime() {
 
 function formatForecast() {
   let forecastElement = document.querySelector("#forecast");
-  forecastElement.innerHTML = ` 
-        <div class="row">
-          <div class="col-2">
-            <div class="forecast-day">Sun</div>
-            <img
-              src="https://openweathermap.org/img/wn/10d@2x.png"
-              alt=""
-              width="42"
-            />
-            <div class="forecast-temperature">
-              <span class="forecast-temperature-max">22°</span>/
-              <span class="low-temp">12°</span>
-            </div>
-          </div>
-        </div>`;
+  let forecastHTML = `<div class="row">`;
+  let days = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thurs"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+        <div class="forecast-day">${day}</div>
+          <img
+            src="https://openweathermap.org/img/wn/10d@2x.png"
+            alt=""
+            width="42"
+          />
+        <div class="forecast-temperature">
+            <span class="forecast-temperature-max">22°</span>/
+            <span class="low-temp">12°</span>
+        </div>
+      </div>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
 
 function showTemperature(response) {
@@ -122,7 +127,6 @@ function handleSubmit(event) {
 
 function showFahrenheitTemperature(event) {
   event.preventDefault();
-
   let centerTempElement = document.querySelector("#current-temperature");
   let leftTempElement = document.querySelector("#current-high-temp");
   let rightTempElement = document.querySelector("#current-low-temp");
