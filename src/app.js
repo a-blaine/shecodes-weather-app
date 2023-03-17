@@ -102,6 +102,7 @@ function handleSubmit(event) {
 
 function showFahrenheitTemperature(event) {
   event.preventDefault();
+
   let centerTempElement = document.querySelector("#current-temperature");
   let leftTempElement = document.querySelector("#current-high-temp");
   let rightTempElement = document.querySelector("#current-low-temp");
@@ -116,9 +117,9 @@ function showFahrenheitTemperature(event) {
   feelsLikeElement.innerHTML = `${Math.round(
     (feelsLikeTemperatureC * 9) / 5 + 32
   )}°`;
-
   fahrenheitLink.classList.remove("inactive");
   celsiusLink.classList.add("inactive");
+  centerContentsDiv.classList.add("fahrenheit");
 }
 
 function showCelsiusTemperature(event) {
@@ -133,12 +134,14 @@ function showCelsiusTemperature(event) {
   feelsLikeElement.innerHTML = `${Math.round(feelsLikeTemperatureC)}°`;
   fahrenheitLink.classList.add("inactive");
   celsiusLink.classList.remove("inactive");
+  centerContentsDiv.classList.remove("fahrenheit");
 }
 
 let celsiusTemperature = null;
 let currentHighTemperatureC = null;
 let currentLowTemperatureC = null;
 let feelsLikeTemperatureC = null;
+let centerContentsDiv = document.querySelector(".current-contents-center");
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);

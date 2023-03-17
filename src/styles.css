@@ -75,12 +75,22 @@ ul {
   padding: 0;
   font-weight: bold;
   text-align: right;
+  position: relative;
+  right: -15px;
 }
 
 .current-contents-center a {
   color: #25161b;
 }
 
+.current-contents-center .inactive {
+  color: #ffffff;
+}
+
+.fahrenheit {
+  position: relative;
+  right: -50px;
+}
 .units {
   font-size: 24px;
   position: relative;
@@ -113,8 +123,4 @@ ul {
 
 .footer a:hover {
   font-weight: bold;
-}
-
-.current-contents-center .inactive {
-  color: #ffffff;
 }
