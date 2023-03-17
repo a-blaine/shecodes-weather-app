@@ -77,6 +77,10 @@ ul {
   text-align: right;
 }
 
+.current-contents-center a {
+  color: #25161b;
+}
+
 .units {
   font-size: 24px;
   position: relative;
@@ -109,10 +113,6 @@ ul {
 
 .footer a:hover {
   font-weight: bold;
-}
-
-.current-contents-center .active {
-  color: #25161b;
 }
 
 .current-contents-center .inactive {

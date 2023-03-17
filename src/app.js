@@ -116,6 +116,9 @@ function showFahrenheitTemperature(event) {
   feelsLikeElement.innerHTML = `${Math.round(
     (feelsLikeTemperatureC * 9) / 5 + 32
   )}°`;
+
+  fahrenheitLink.classList.remove("inactive");
+  celsiusLink.classList.add("inactive");
 }
 
 function showCelsiusTemperature(event) {
@@ -128,6 +131,8 @@ function showCelsiusTemperature(event) {
   leftTempElement.innerHTML = `${Math.round(currentHighTemperatureC)}°`;
   rightTempElement.innerHTML = `${Math.round(currentLowTemperatureC)}°`;
   feelsLikeElement.innerHTML = `${Math.round(feelsLikeTemperatureC)}°`;
+  fahrenheitLink.classList.add("inactive");
+  celsiusLink.classList.remove("inactive");
 }
 
 let celsiusTemperature = null;
