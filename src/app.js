@@ -109,7 +109,7 @@ function showTemperature(response) {
   displayDescription.innerHTML = `${response.data.weather[0].main}`;
   displayFeel.innerHTML = ` ${Math.round(feelsLikeTemperatureC)}°`;
   displayHumidity.innerHTML = ` ${response.data.main.humidity}%`;
-  displayWind.innerHTML = ` ${Math.round(response.data.wind.speed)}km/h`;
+  displayWind.innerHTML = ` ${Math.round(response.data.wind.speed)} km/h`;
   displayDate.innerHTML = formatDate(response.data.dt * 1000);
   displayTime.innerHTML = formatTime(response.data.dt * 1000);
   displayIcon.setAttribute("alt", response.data.weather[0].description);
