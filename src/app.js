@@ -43,6 +43,25 @@ function formatTime() {
   return `${hours}:${minutes}`;
 }
 
+function formatForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = ` 
+        <div class="row">
+          <div class="col-2">
+            <div class="forecast-day">Sun</div>
+            <img
+              src="https://openweathermap.org/img/wn/10d@2x.png"
+              alt=""
+              width="42"
+            />
+            <div class="forecast-temperature">
+              <span class="forecast-temperature-max">22°</span>/
+              <span class="low-temp">12°</span>
+            </div>
+          </div>
+        </div>`;
+}
+
 function showTemperature(response) {
   let h1 = document.querySelector("#city");
   let centerTemp = document.querySelector("#current-temperature");
@@ -55,6 +74,7 @@ function showTemperature(response) {
   let displayDate = document.querySelector("#date");
   let displayTime = document.querySelector("#time");
   let displayIcon = document.querySelector("#icon");
+  formatForecast();
   celsiusTemperature = response.data.main.temp;
   currentHighTemperatureC = response.data.main.temp_max;
   currentLowTemperatureC = response.data.main.temp_min;
