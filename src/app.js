@@ -1,3 +1,9 @@
+let celsiusTemperature = null;
+let currentHighTemperatureC = null;
+let currentLowTemperatureC = null;
+let feelsLikeTemperatureC = null;
+let centerContentsDiv = document.querySelector(".current-contents-center");
+
 function formatDate(timestamp) {
   let days = [
     "Sunday",
@@ -50,7 +56,7 @@ function formatForecastDay(timestamp) {
   return days[day];
 }
 
-function formatForecast(response) {
+function showForecast(response) {
   let weatherForecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
@@ -68,10 +74,12 @@ function formatForecast(response) {
             width="42"
           />
         <div class="forecast-temperature">
-            <span class="forecast-temperature-max">${Math.round(
+            <span class="forecast-temperature-max" id="forecast-temperature-max">${Math.round(
               forecastDay.temp.max
             )}°</span>/
-            <span class="low-temp">${Math.round(forecastDay.temp.min)}°</span>
+            <span class="low-temp forecast-temperature-min">${Math.round(
+              forecastDay.temp.min
+            )}°</span>
         </div>
       </div>`;
     }
@@ -83,7 +91,15 @@ function formatForecast(response) {
 function fetchForecast(coordinates) {
   let apiKey = "ca0db41e2e878c74a1dfc7ffece370d4";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(formatForecast);
+  axios.get(apiUrl).then(showForecast);
+}
+
+function checkUnitColor() {
+  if (celsiusLink.classList.contains("inactive")) {
+    celsiusLink.classList.remove("inactive");
+    fahrenheitLink.classList.add("inactive");
+    centerContentsDiv.classList.remove("fahrenheit");
+  }
 }
 
 function showTemperature(response) {
@@ -117,7 +133,6 @@ function showTemperature(response) {
     "src",
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
-
   fetchForecast(response.data.coord);
 }
 
@@ -125,6 +140,7 @@ function fetchLocation(position) {
   let currentApiKey = "7ae5e58d29dbe83f5367ad389e4a99a2";
   let currentApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${currentApiKey}&units=metric`;
   axios.get(currentApiUrl).then(showTemperature);
+  checkUnitColor();
 }
 
 function handleButtonSubmit() {
@@ -179,12 +195,6 @@ function showCelsiusTemperature(event) {
   centerContentsDiv.classList.remove("fahrenheit");
 }
 
-let celsiusTemperature = null;
-let currentHighTemperatureC = null;
-let currentLowTemperatureC = null;
-let feelsLikeTemperatureC = null;
-let centerContentsDiv = document.querySelector(".current-contents-center");
-
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
@@ -197,4 +207,4 @@ fahrenheitLink.addEventListener("click", showFahrenheitTemperature);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsiusTemperature);
 
-search("Seattle");
+search("Stockholm");
