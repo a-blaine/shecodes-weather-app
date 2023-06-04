@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600&display=swap");
 
 body {
-  background: #f0fbff;
+  background: url("/media/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #25161b;
   font-family: Noto Sans;
 }
@@ -23,11 +25,12 @@ hr {
 }
 
 .container {
-  background: #bccad6;
+  background: #dccfda;
   border: 1px solid rgba(32, 22, 27, 0.25);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   border-radius: 10px;
   display: block;
-  margin: 30px auto 10px;
+  margin: 90px auto 10px;
   max-width: 800px;
   min-width: 200px;
 }
@@ -139,7 +142,7 @@ hr {
 }
 
 .footer a {
-  color: rgba(29, 41, 132, 0.8);
+  color: #fff;
   transition: all 200ms ease;
 }
 
